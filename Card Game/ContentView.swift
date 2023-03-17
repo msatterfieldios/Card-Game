@@ -8,49 +8,94 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojis = ["⚽️","🏀","🏈","⚾️","🥎","🎾","🏐","🏉","🥏","🎱","🪀","🏓","🏸","🏒","🏑","🥍","🏏","🪃","🥅","⛳️"]
-    @State var emojiCount = 4
+   // Used at @State so the ver is a pointer.  Without this it make the array immutable.  Not sure why
+   @State var emojis = ["🚗","🚕","🚙","🚌","🚎","🏎️","🚓","🚑",
+                        "🚒","🚐","🛻","🚚","🚛","🚜","🚲","🛵",
+                        "🏍️","🛺","🚠","✈️"]
+    @State var emojiCount = 5
     var body: some View {
         VStack {
+            Text("Memorize!")
+                .font(.title)
+                .fontWeight(.bold)
+                .padding(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/)
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum:65))] ){
-                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
+                    ForEach(emojis[0..<emojis.count], id: \.self) { emoji in
                         CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
                     }
                     
-                } //========== end of LazyVGrid
+                }
+//==================================== end of LazyVGrid ======================================
             }
             .foregroundColor(.red)
+//===================================== end of ScrollView ======================================
             Spacer()
             HStack {
-                minus
+                transportation
                 Spacer()
-                plus
+                vegetable
+                Spacer()
+                fitness
             }
-            //========== end of HStack
+//========================================= end of HStack ======================================
             .font(.largeTitle)
             .padding(.horizontal)
-        }  //============ end of VStack
+            HStack {
+                Text("Automobiles")
+                    .font(.title2)
+                    .foregroundColor(.blue)
+               Spacer()
+                Text("Vegetable")
+                    .font(.title2)
+                    .foregroundColor(.blue)
+                Spacer()
+                Text("Fitness")
+                    .font(.title2)
+                    .foregroundColor(.blue)
+               
+            }
+        }
         .padding(.horizontal)
+        
+//========================================== end of VStack ======================================
+        
     }
-    // ======== End of Body
-    var minus: some View {
+    
+// ========================================= end of Body ========================================
+    var transportation: some View {
         Button {
-            if emojiCount > 1 {
-                emojiCount -= 1
+            if emojis.count > 1 {
+                emojis.removeAll()
+                emojis = ["🚗","🚕","🚙","🚌","🚎","🏎️","🚓","🚑",
+                          "🚒","🚐","🛻","🚚","🚛","🚜","🚲","🛵",
+                          "🏍️","🛺","🚠","✈️"]
+                emojis.shuffle()
             }
-        } label:{Image(systemName: "minus.circle")}
+        } label:{Image(systemName: "car")}
     }
-    //========== End of Minus Button
+//========================================== End of transportation Button ===================================
 
-    var plus: some View {
+    var fitness: some View {
         Button {
-            if emojiCount < emojis.count {
-                emojiCount += 1
+            if emojis.count > 0 {
+                emojis.removeAll()
+                emojis = ["⚽️","🏀","🏈","⚾️","🥎","🎾","🏐","🏉","🥏","🎱"]
+                emojis.shuffle()
             }
-        } label:{Image(systemName: "plus.circle")}
+        } label:{Image(systemName: "figure.run")}
     }
-    //========= End of plus Button
+//========================================== End of fitness Button ====================================
+    var vegetable: some View {
+        Button {
+            if emojis.count > 0 {
+                emojis.removeAll()
+                emojis = ["🥦","🥬","🧅","🧄","🫑","🍆","🥔","🥗","🥒","🥕"]
+                emojis.shuffle()
+            }
+        } label:{Image(systemName: "carrot")}
+    }
+//========================================== End of fitness Button ====================================
 
     struct CardView: View {
         var content: String
@@ -72,7 +117,7 @@ struct ContentView: View {
             }
         }
     }
-    //========= End of CardView
+//=========================================== End of CardView ========================================
 }
     
     
