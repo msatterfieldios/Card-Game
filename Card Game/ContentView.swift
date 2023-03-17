@@ -38,7 +38,7 @@ struct ContentView: View {
                 Spacer()
                 fitness
             }
-//========================================= end of HStack ======================================
+//========================================= end of HStack for card type buttons ======================================
             .font(.largeTitle)
             .padding(.horizontal)
             HStack {
@@ -55,6 +55,7 @@ struct ContentView: View {
                     .foregroundColor(.blue)
                
             }
+//========================================= end of HStack for Button Titles ======================================
         }
         .padding(.horizontal)
         
