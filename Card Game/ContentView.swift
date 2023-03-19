@@ -32,29 +32,12 @@ struct ContentView: View {
 //===================================== end of ScrollView ======================================
             Spacer()
             HStack {
-                transportation
-                Spacer()
-                vegetable
-                Spacer()
-                fitness
+                
             }
 //========================================= end of HStack for card type buttons ======================================
             .font(.largeTitle)
             .padding(.horizontal)
-            HStack {
-                Text("Automobiles")
-                    .font(.title2)
-                    .foregroundColor(.blue)
-               Spacer()
-                Text("Vegetable")
-                    .font(.title2)
-                    .foregroundColor(.blue)
-                Spacer()
-                Text("Fitness")
-                    .font(.title2)
-                    .foregroundColor(.blue)
-               
-            }
+           
 //========================================= end of HStack for Button Titles ======================================
         }
         .padding(.horizontal)
@@ -64,39 +47,8 @@ struct ContentView: View {
     }
     
 // ========================================= end of Body ========================================
-    var transportation: some View {
-        Button {
-            if emojis.count > 1 {
-                emojis.removeAll()
-                emojis = ["🚗","🚕","🚙","🚌","🚎","🏎️","🚓","🚑",
-                          "🚒","🚐","🛻","🚚","🚛","🚜","🚲","🛵",
-                          "🏍️","🛺","🚠","✈️"]
-                emojis.shuffle()
-            }
-        } label:{Image(systemName: "car")}
-    }
-//========================================== End of transportation Button ===================================
-
-    var fitness: some View {
-        Button {
-            if emojis.count > 0 {
-                emojis.removeAll()
-                emojis = ["⚽️","🏀","🏈","⚾️","🥎","🎾","🏐","🏉","🥏","🎱"]
-                emojis.shuffle()
-            }
-        } label:{Image(systemName: "figure.run")}
-    }
-//========================================== End of fitness Button ====================================
-    var vegetable: some View {
-        Button {
-            if emojis.count > 0 {
-                emojis.removeAll()
-                emojis = ["🥦","🥬","🧅","🧄","🫑","🍆","🥔","🥗","🥒","🥕"]
-                emojis.shuffle()
-            }
-        } label:{Image(systemName: "carrot")}
-    }
-//========================================== End of fitness Button ====================================
+    
+   
 
     struct CardView: View {
         var content: String
