@@ -8,70 +8,56 @@
 import SwiftUI
 
 struct ContentView: View {
-   // Used at @State so the ver is a pointer.  Without this it make the array immutable.  Not sure why
-   @State var emojis = ["🚗","🚕","🚙","🚌","🚎","🏎️","🚓","🚑",
-                        "🚒","🚐","🛻","🚚","🚛","🚜","🚲","🛵",
-                        "🏍️","🛺","🚠","✈️"]
-    @State var emojiCount = 5
+    
+    @ObservedObject var viewModel: EmojiMemoryGame
+    
     var body: some View {
-        VStack {
-            Text("Memorize!")
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/)
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum:65))] ){
-                    ForEach(emojis[0..<emojis.count], id: \.self) { emoji in
-                        CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
-                    }
-                    
+        
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum:60))] ){
+                ForEach(viewModel.cards) { card in
+                    CardView(card:card)
+                        .aspectRatio(2/3, contentMode: .fit)
+                        .onTapGesture {
+                            viewModel.choose(card)
+                        }
                 }
-//==================================== end of LazyVGrid ======================================
-            }
-            .foregroundColor(.red)
-//===================================== end of ScrollView ======================================
-            Spacer()
-            HStack {
                 
             }
-//========================================= end of HStack for card type buttons ======================================
-            .font(.largeTitle)
-            .padding(.horizontal)
-           
-//========================================= end of HStack for Button Titles ======================================
+            //==================================== end of LazyVGrid ======================================
         }
+        .foregroundColor(.red)
         .padding(.horizontal)
         
-//========================================== end of VStack ======================================
-        
     }
+}
     
 // ========================================= end of Body ========================================
     
    
 
     struct CardView: View {
-        var content: String
-        @State var isFaceUp:Bool = true
+        
+        let card:MemoryGame<String>.Card
+        
         var body: some View {
             ZStack{
                 let shape = RoundedRectangle(cornerRadius: 20)
-                if isFaceUp {
+                if card.isFaceUp {
                     shape.fill().foregroundColor(.white)
                     shape.strokeBorder(lineWidth: 3)
-                    Text(content).font(.largeTitle)
+                    Text(card.content).font(.largeTitle)
+                } else if card.isMatched {
+                    shape.opacity(0)
                 }
                 else {
                     shape.fill()
                 }
             }
-            .onTapGesture {
-                isFaceUp = !isFaceUp
-            }
         }
     }
 //=========================================== End of CardView ========================================
-}
+
     
     
     
@@ -103,9 +89,12 @@ struct ContentView: View {
     
 struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
-            ContentView()
+//=========================== Create our ViewModel ============================
+        let game = EmojiMemoryGame()
+//=========================== Pass our viewModel to the view ====================
+            ContentView(viewModel: game)
                 .preferredColorScheme(.dark)
-            ContentView()
+            ContentView(viewModel: game)
         }
     }
 

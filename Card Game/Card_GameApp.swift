@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct Card_GameApp: App {
+    
+//================================= Creating the ModelView ==============================
+    let game = EmojiMemoryGame()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//================================= Pass the viewModel to our view =======================
+            ContentView(viewModel: game)
         }
     }
 }
