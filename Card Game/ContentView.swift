@@ -12,9 +12,8 @@ struct ContentView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
-        
         ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum:60))] ){
+            LazyVGrid(columns: [GridItem(.adaptive(minimum:65))] ){
                 ForEach(viewModel.cards) { card in
                     CardView(card:card)
                         .aspectRatio(2/3, contentMode: .fit)
@@ -22,8 +21,9 @@ struct ContentView: View {
                             viewModel.choose(card)
                         }
                 }
-              
+                
             }
+            
             //==================================== end of LazyVGrid ======================================
            
         }
@@ -52,11 +52,14 @@ struct ContentView: View {
                     shape.opacity(0)
                 }
                 else {
+                    // added drawing the card so that the rect stays the same size between card up and down
+                    Text(card.content).font(.largeTitle)
                     shape.fill()
                 }
             }
             // end of ZStack
         }
+        
     }
 //=========================================== End of CardView ========================================
 
