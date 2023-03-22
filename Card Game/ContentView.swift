@@ -22,9 +22,10 @@ struct ContentView: View {
                             viewModel.choose(card)
                         }
                 }
-                
+              
             }
             //==================================== end of LazyVGrid ======================================
+           
         }
         .foregroundColor(.red)
         .padding(.horizontal)
@@ -54,6 +55,7 @@ struct ContentView: View {
                     shape.fill()
                 }
             }
+            // end of ZStack
         }
     }
 //=========================================== End of CardView ========================================
