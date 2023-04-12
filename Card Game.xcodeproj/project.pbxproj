@@ -16,6 +16,7 @@
 		4D620B4129DC737900C947B3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D620B4029DC737900C947B3 /* Theme.swift */; };
 		4D620B4329E6176C00C947B3 /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D620B4229E6176C00C947B3 /* AspectVGrid.swift */; };
 		4D81175F29CB9C2F00FE6331 /* ColorTheme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D81175E29CB9C2F00FE6331 /* ColorTheme.xcassets */; };
+		4DABD12929E73706001C2389 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABD12829E73706001C2389 /* Pie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		4D620B4029DC737900C947B3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		4D620B4229E6176C00C947B3 /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
 		4D81175E29CB9C2F00FE6331 /* ColorTheme.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorTheme.xcassets; sourceTree = "<group>"; };
+		4DABD12829E73706001C2389 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			children = (
 				4D4B06DA29C400DF00209145 /* Card_GameApp.swift */,
 				4D4B06DC29C400DF00209145 /* EmojiMemoryGameView.swift */,
+				4DABD12829E73706001C2389 /* Pie.swift */,
 				4D620B4229E6176C00C947B3 /* AspectVGrid.swift */,
 				4D02B3C229C67C34006CBE4A /* MemoryGame.swift */,
 				4D02B3C429C67FDB006CBE4A /* EmojiMemoryGame.swift */,
@@ -157,6 +160,7 @@
 				4D4B06DD29C400DF00209145 /* EmojiMemoryGameView.swift in Sources */,
 				4D620B4329E6176C00C947B3 /* AspectVGrid.swift in Sources */,
 				4D620B4129DC737900C947B3 /* Theme.swift in Sources */,
+				4DABD12929E73706001C2389 /* Pie.swift in Sources */,
 				4D4B06DB29C400DF00209145 /* Card_GameApp.swift in Sources */,
 				4D02B3C529C67FDB006CBE4A /* EmojiMemoryGame.swift in Sources */,
 			);
