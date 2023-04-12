@@ -16,7 +16,7 @@ struct Card_GameApp: App {
     var body: some Scene {
         WindowGroup {
 //================================= Pass the viewModel to our view =======================
-            ContentView(viewModel: game)
+            EmojiMemoryGameView(game: game)
         }
     }
 }
