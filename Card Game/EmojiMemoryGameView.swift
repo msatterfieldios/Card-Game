@@ -8,32 +8,39 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-    
     @ObservedObject var game: EmojiMemoryGame
     
-    
     var body: some View {
+        VStack {
+            gameBody
+            shuffle
+        }
+        .padding()
         
-//        ScrollView {
-//            LazyVGrid(columns: [GridItem(.adaptive(minimum:100))] ){
-//                ForEach(game.cards) { card in
-        AspectVGrid(items: game.cards, aspectRatio: 2/3, content: {card in
+    }
+    var gameBody: some View {
+        AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
             
-        
-                    CardView(card:card)
-                        .padding(4)
-                        .onTapGesture {
+            if card.isMatched && !card.isFaceUp {
+                Color.clear
+            } else {
+                CardView(card:card)
+                    .padding(4)
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 3)) {
                             game.choose(card)
                         }
-        })
-//                }
-//            }
-//
-//            //==================================== end of LazyVGrid ======================================
-//
-//        }
-        .padding(.horizontal)
+                    }
+            }
+        }
         .foregroundColor(Color.red)
+    }
+    var shuffle: some View {
+        Button("Shuffle") {
+            withAnimation {
+                game.shuffle()
+            }
+        }
     }
 }
     
@@ -41,36 +48,33 @@ struct EmojiMemoryGameView: View {
     
     struct CardView: View {
         
-        let card:MemoryGame<String>.Card
+        let card:EmojiMemoryGame.Card
         
         var body: some View {
             GeometryReader {geometry in
                 ZStack{
-                    let shape = RoundedRectangle(cornerRadius: DrawingConstant.cornerRadius)
-                    if card.isFaceUp {
-                        shape.fill().foregroundColor(.white)
-                        shape.strokeBorder(lineWidth: DrawingConstant.lineWidth)
-                        Circle().padding(5).opacity(0.5)
-                        Text(card.content).font(font(in:geometry.size))
-                    } else if card.isMatched {
-                        shape.opacity(0)
-                    }
-                    else {
-                        shape.fill()
-                    }
+                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
+                        .padding(5).opacity(0.5)
+                    Text(card.content)
+                        .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
+                        .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
+                        .font(Font.system(size: DrawingConstant.fontSize))
+                        .scaleEffect(scale(thatFits: geometry.size))
                 }
+                .cardify (isFaceUp: card.isFaceUp)
                 // end of ZStack
+                
             }
             
-            }
-        private func font(in size: CGSize) -> Font {
-            Font.system(size:min(size.width, size.height)*DrawingConstant.fontScale)
+        }
+        private func scale(thatFits size: CGSize) -> CGFloat {
+            min(size.width, size.height) / (DrawingConstant.fontSize / DrawingConstant.fontScale)
         }
         
+        
         private struct DrawingConstant {
-            static let cornerRadius:CGFloat = 10
-            static let lineWidth:CGFloat = 3
             static let fontScale:CGFloat = 0.65
+            static let fontSize: CGFloat = 32
             
         }
         
@@ -111,7 +115,7 @@ struct ContentView_Previews: PreviewProvider {
 //=========================== Create our ViewModel ============================
         let game = EmojiMemoryGame()
 //=========================== Pass our viewModel to the view ====================
-            game.choose(game.cards.first!)
+          //  game.choose(game.cards.first!)
             return EmojiMemoryGameView(game: game)
         }
     }

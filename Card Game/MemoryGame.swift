@@ -41,15 +41,9 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         print("\(cards)")
     }
 //======================================== End func choose  ======================================
-//                                               This function gets replaced by the inlind function above
-//    func index(of card:Card) -> Int? {
-//        for index in 0..<cards.count {
-//            if cards[index].id == card.id {
-//                return index
-//            }
-//        }
-//        return nil
-//    }
+    mutating func shuffle() {
+        cards.shuffle()
+    }
     
 //======================================== Begin init ============================================
     
@@ -60,6 +54,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             cards.append(Card(content: content, id: pairIndex*2))
             cards.append(Card(content: content, id: pairIndex*2 + 1))
         }
+        cards.shuffle()
     }
 //======================================== End init ================================================
 //======================================== Begin Card struct  =======================================
